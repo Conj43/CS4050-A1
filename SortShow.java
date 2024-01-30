@@ -66,6 +66,9 @@ public class SortShow extends JPanel {
 			//giving j element in lines_lengths the value of temp
 			lines_lengths[j] = temp;
 		}
+
+
+
 		
 		//The selectionSort method
 		public void SelectionSort(){
@@ -236,6 +239,62 @@ public class SortShow extends JPanel {
 		for (index = first; index <= last; index++)
 			lines_lengths[index] = tempArray[index];
 	}
+	/////////////////////////////////////////
+		public void BubbleSort(){
+			//getting the date and time when the bubble sort starts
+			Calendar start = Calendar.getInstance();
+			//Using the selection sort to lines_lengths sort the array
+
+			//You need to complete this part.
+
+			//getting the date and time when the bubble sort ends
+			Calendar end = Calendar.getInstance();
+			//getting the time it took for the bubble sort to execute
+			//subtracting the end time with the start time
+			SortGUI.bubbleTime = end.getTime().getTime() - start.getTime().getTime();
+		}
+		///////////////////////////////////////////////////////
+		public void InsertionSort(){
+			//getting the date and time when the insertion sort starts
+			Calendar start = Calendar.getInstance();
+			//Using the selection sort to lines_lengths sort the array
+
+			//You need to complete this part.
+
+			//getting the date and time when the insertion sort ends
+			Calendar end = Calendar.getInstance();
+			//getting the time it took for the insertion sort to execute
+			//subtracting the end time with the start time
+			SortGUI.insertionTime = end.getTime().getTime() - start.getTime().getTime();
+		}
+		////////////////////////////////////////////////////////////////////////
+		public void ShellSort(){
+			//getting the date and time when the shell sort starts
+			Calendar start = Calendar.getInstance();
+			//Using the selection sort to lines_lengths sort the array
+
+			//You need to complete this part.
+
+			//getting the date and time when the shell sort ends
+			Calendar end = Calendar.getInstance();
+			//getting the time it took for the shell sort to execute
+			//subtracting the end time with the start time
+			SortGUI.shellTime = end.getTime().getTime() - start.getTime().getTime();
+		}
+		////////////////////////////////////////////////////////////////////
+		public void QuickSort(){
+			//getting the date and time when the quick sort starts
+			Calendar start = Calendar.getInstance();
+			//Using the selection sort to lines_lengths sort the array
+
+			//You need to complete this part.
+
+			//getting the date and time when the quick sort ends
+			Calendar end = Calendar.getInstance();
+			//getting the time it took for the quick sort to execute
+			//subtracting the end time with the start time
+			SortGUI.quickTime = end.getTime().getTime() - start.getTime().getTime();
+		}
 
 	//////////////////////////////////////////////////////////////////////	
 		
