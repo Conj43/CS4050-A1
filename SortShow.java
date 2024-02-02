@@ -101,7 +101,7 @@ public class SortShow extends JPanel {
 			Calendar start = Calendar.getInstance();
 			//assigning the size for the tempArray below
 
-			//You need to complete this part.
+			R_MergeSort(0, total_number_of_lines-1);
 
 			Calendar end = Calendar.getInstance();
 			//getting the time it took for the iterative merge sort to execute
@@ -114,8 +114,11 @@ public class SortShow extends JPanel {
 		public void R_MergeSort(int first, int last){
 			if(first < last){
 
-				//You need to complete this part.
-
+				int mid = (first+last)/2;
+				R_MergeSort(first, mid);
+				R_MergeSort(mid+1, last);
+				R_Merge(first, mid, last);
+				paintComponent(this.getGraphics());
 				//Causing a delay for 10ms
 				delay(10); 
 			}
@@ -125,8 +128,49 @@ public class SortShow extends JPanel {
 		//recursive merge sort method
 		public void R_Merge(int first, int mid, int last){
 
-			//You need to complete this part.
-				//hilol
+			int size_one = mid - first + 1;
+			int size_two = last - mid;
+
+			int[] leftArray = new int[size_one];
+			int[] rightArray = new int[size_two];
+
+
+			for(int i = 0; i < size_one; ++i){
+				leftArray[i] = lines_lengths[first + i];
+			}
+			for(int j = 0; j < size_two; ++j){
+				rightArray[j] = lines_lengths[mid + 1+ j];
+			}
+
+			int i = 0;
+			int j = 0;
+			int k = first;
+
+			while(i < size_one && j < size_two){
+				if(leftArray[i] <= rightArray[j]){
+					lines_lengths[k] = leftArray[i];
+					i++;
+				}
+				else{
+					lines_lengths[k] = rightArray[j];
+					j++;
+				}
+				k++;
+			}
+
+			while(size_one > i){
+				lines_lengths[k] = leftArray[i];
+				i++;
+				k++;
+			}
+
+			while(size_two > j){
+				lines_lengths[k] = rightArray[j];
+				j++;
+				k++;
+			}
+			paintComponent(this.getGraphics());
+
 		}
 		
 		//
@@ -253,6 +297,10 @@ public class SortShow extends JPanel {
 			//subtracting the end time with the start time
 			SortGUI.bubbleTime = end.getTime().getTime() - start.getTime().getTime();
 		}
+
+
+
+
 		///////////////////////////////////////////////////////
 		public void InsertionSort(){
 			//getting the date and time when the insertion sort starts

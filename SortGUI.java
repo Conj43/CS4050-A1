@@ -21,13 +21,13 @@ public class SortGUI {
 	public static double rmergeTime = 0.0;
 	//a variable that holds the amount of time for the iterative merge sort takes to execute
 	public static double imergeTime = 0.0;
-	//a variable that holds the amount of time for the iterative merge sort takes to execute
+	//a variable that holds the amount of time for the bubble sort takes to execute
 	public static double bubbleTime = 0.0;
-	//a variable that holds the amount of time for the iterative merge sort takes to execute
+	//a variable that holds the amount of time for the insertion sort takes to execute
 	public static double insertionTime = 0.0;
-	//a variable that holds the amount of time for the iterative merge sort takes to execute
+	//a variable that holds the amount of time for the shell sort takes to execute
 	public static double shellTime = 0.0;
-	//a variable that holds the amount of time for the iterative merge sort takes to execute
+	//a variable that holds the amount of time for the quick sort takes to execute
 	public static double quickTime = 0.0;
 	//Boolean variable that is made to keep track whether or not the selection sort has already been used
 	public boolean Selection_Done = false;
@@ -72,13 +72,13 @@ public class SortGUI {
 		JRadioButton rmerge = new JRadioButton("Merge Recursive");
 		//making a iterative merge button with a text "Selection" on it
 		JRadioButton imerge = new JRadioButton("Merge Iterative");
-		//making button for bubble sort
+		//making button for bubble sort with text "Bubble-Sort" on it
 		JRadioButton bubble = new JRadioButton("Bubble-Sort");
 		//making button for insertion sort with text "Insertion"
 		JRadioButton insertion = new JRadioButton("Insertion");
 		//making button for shell sort with text "shell"
 		JRadioButton shell = new JRadioButton("Shell");
-		//making a button for quicksort with text "quick sort"
+		//making a button for quicksort with text "quick-sort"
 		JRadioButton quick = new JRadioButton("Quick-Sort");
 		//making a reset button with a text "Selection" on it
 		JRadioButton reset = new JRadioButton("Reset");
@@ -306,7 +306,7 @@ public class SortGUI {
 					sortArea.ShellSort();
 					//The amount of time taken for shell sort took
 					shell_time_taken.setText((shellTime / 1000) + " Seconds");
-					//shell sort has finished/been clicked
+					//Shell sort has finished/been clicked
 					Shell_Done = true;
 					//setting all booleans false except for reset
 					Set_Available_Chooses(false, false, false, false, false, false,  false, true);
@@ -334,13 +334,19 @@ public class SortGUI {
 					reset.setEnabled(false);
 					//reseting the lines_lengths to its scrambled lines
 					sortArea.reset();
-
+					//creating local boolean of Selection_Done, so we can keep track of what buttons have been clicked
 					boolean local_Selection_Done = true;
+					//creating local boolean of Recursive_Merge_Done, so we can keep track of what buttons have been clicked
 					boolean local_RMerge_Done = true;
+					//creating local boolean of Iterative_Merge_Done, so we can keep track of what buttons have been clicked
 					boolean local_IMerge_Done = true;
+					//creating local boolean of Insertion_Done, so we can keep track of what buttons have been clicked
 					boolean local_Insertion_Done = true;
+					//creating local boolean of Bubble_Done, so we can keep track of what buttons have been clicked
 					boolean local_Bubble_Done = true;
+					//creating local boolean of Shell_Done, so we can keep track of what buttons have been clicked
 					boolean local_Shell_Done = true;
+					//creating local boolean of Quick_Done, so we can keep track of what buttons have been clicked
 					boolean local_Quick_Done = true;
 
 					//There are many different combinations of what could be clicked 
@@ -367,30 +373,31 @@ public class SortGUI {
 						
 					}
 					else {
-
+						//if Selection_Done is true, then we deactivate the Selection button
 					 if (Selection_Done) {
 							local_Selection_Done = false;
 
-						}  if (Recersive_Merge_Done) {
+						}  if (Recersive_Merge_Done) { //if Recursive_Merge_Done is true, then we deactivate the R_Merge button
 
 							local_RMerge_Done = false;
 
-						} if (Iterative_Merge_Done) {
+						} if (Iterative_Merge_Done) { //if Iterative_Merge_Done is true, then we deactivate the I_Merge button
 							local_IMerge_Done = false;
 
-						}  if (Insertion_Done) {
+						}  if (Insertion_Done) { //if Insertion_Done is true, then we deactivate the Insertion button
 							local_Insertion_Done = false;
 
-						} if (Bubble_Done) {
+						} if (Bubble_Done) { //if Bubble_Done is true, then we deactivate the Bubble button
 							local_Bubble_Done = false;
 
-						}  if (Shell_Done) {
+						}  if (Shell_Done) { //if Shell_Done is true, then we deactivate the Shell button
 							local_Shell_Done = false;
 
-						}  if (Quick_Done) {
+						}  if (Quick_Done) { //if Quick_Done is true, then we deactivate the Quick button
 							local_Quick_Done = false;
 
 						}
+					 //pass the local variable to the Set_Available_Chooses, so that we don't need a bunch of if statements, we can just check each time if that button has been clicked
 						Set_Available_Chooses(local_Selection_Done, local_RMerge_Done, local_IMerge_Done, local_Bubble_Done, local_Insertion_Done, local_Shell_Done, local_Quick_Done, false);
 					}
 				}
