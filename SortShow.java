@@ -298,24 +298,21 @@ public class SortShow extends JPanel {
 			SortGUI.bubbleTime = end.getTime().getTime() - start.getTime().getTime();
 		}
 
-		public void bubble_Sort(int n){
+		public void bubble_Sort(int n){ //method to sort using bubble sort, takes an integer of size n which is size of the array
 			for(int lastIndex = n-1; lastIndex > 0; lastIndex--){ //begin at last index of array and move towards the front of the array
-				int lastSwapIndex = 0; //part of betterBubbleSort so we can keep track of most recent swap
-				for(int i = 0; i < lastIndex; i++){
-					findSwaps(i, i+1);
-					lastSwapIndex = i;
-					paintComponent(this.getGraphics());
+				int lastSwapIndex = 0; //part of betterBubbleSort, we can keep track of most recent swap in inner loop
+				for(int i = 0; i < lastIndex; i++){ //this loop is where we compare and swap elements
+					if(lines_lengths[i] > lines_lengths[i+1]) { //check and see if value at index i is greater than value at index i+1, if true, swap
+						swap(i, i + 1); //simple swap method that swaps elements at i and i+1
+						lastSwapIndex = i; //keeps track of most recent swap to get better performance, doesn't look at already sorted elements
+						paintComponent(this.getGraphics()); //update GUI
 					}
-				lastIndex = lastSwapIndex + 1;
+					}
+				lastIndex = lastSwapIndex + 1; //updates bounds so that we don't make unnecessary comparisons
 				}
-
 			}
 
-			public void findSwaps(int i, int j){
-			if(lines_lengths[i] > lines_lengths[j]){
-				swap(i, j);
-			}
-			}
+
 
 
 
