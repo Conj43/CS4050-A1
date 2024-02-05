@@ -126,8 +126,8 @@ public class SortShow extends JPanel {
 		public void R_MergeSort(){
 			//getting the date and time when the recursive merge sort starts
 			Calendar start = Calendar.getInstance();
-			//assigning the size for the tempArray below
 
+			//calling recursive merge sort method
 			R_MergeSort(0, total_number_of_lines-1);
 
 			Calendar end = Calendar.getInstance();
@@ -139,13 +139,13 @@ public class SortShow extends JPanel {
 		
 		//recursive merge sort method
 		public void R_MergeSort(int first, int last){
-			if(first < last){
+			if(first < last){ //when first < last is false, we are done splitting the array
 
-				int mid = (first+last)/2;
-				R_MergeSort(first, mid);
-				R_MergeSort(mid+1, last);
-				R_Merge(first, mid, last);
-				paintComponent(this.getGraphics());
+				int mid = (first+last)/2; //middle of each subarray
+				R_MergeSort(first, mid); //recursive call on left half
+				R_MergeSort(mid+1, last); //recurive call on right half
+				R_Merge(first, mid, last); //method to merge subarrays
+				paintComponent(this.getGraphics()); //update GUI after each merge
 				//Causing a delay for 10ms
 				delay(10); 
 			}
@@ -155,48 +155,48 @@ public class SortShow extends JPanel {
 		//recursive merge sort method
 		public void R_Merge(int first, int mid, int last){
 
-			int size_one = mid - first + 1;
-			int size_two = last - mid;
+			int size_one = mid - first + 1; //size of left subarray
+			int size_two = last - mid; //size of right subarray
 
-			int[] leftArray = new int[size_one];
-			int[] rightArray = new int[size_two];
+			int[] leftArray = new int[size_one]; //create new temp array for left
+			int[] rightArray = new int[size_two]; //create new temp array for right
 
 
-			for(int i = 0; i < size_one; ++i){
+			for(int i = 0; i < size_one; ++i){ // transfer to left temp array from original array
 				leftArray[i] = lines_lengths[first + i];
 			}
-			for(int j = 0; j < size_two; ++j){
+			for(int j = 0; j < size_two; ++j){ //transfer to right temp array from original array
 				rightArray[j] = lines_lengths[mid + 1+ j];
 			}
 
-			int i = 0;
-			int j = 0;
-			int k = first;
+			int i = 0; //index for left array
+			int j = 0; //index for right array
+			int k = first; //index for array that will be sorted
 
-			while(i < size_one && j < size_two){
-				if(leftArray[i] <= rightArray[j]){
+			while(i < size_one && j < size_two){ //loop that ends when we get to end of one of the subarrays
+				if(leftArray[i] <= rightArray[j]){ //if left[i] <= right[j] insert left[i] at this point in array
 					lines_lengths[k] = leftArray[i];
-					i++;
+					i++; //increment left index
 				}
 				else{
-					lines_lengths[k] = rightArray[j];
-					j++;
+					lines_lengths[k] = rightArray[j]; //else insert right[j] at current index
+					j++; //increment right index
 				}
-				k++;
+				k++; //increment index of original array
 			}
 
-			while(size_one > i){
+			while(size_one > i){ //make sure right array is empty, if not, all elements should already be in sorted order and we can add to end
 				lines_lengths[k] = leftArray[i];
 				i++;
 				k++;
 			}
 
-			while(size_two > j){
+			while(size_two > j){ //make sure left array is empty, if not, all elements should already be in sorted order and we can add to end
 				lines_lengths[k] = rightArray[j];
 				j++;
 				k++;
 			}
-			paintComponent(this.getGraphics());
+			paintComponent(this.getGraphics()); //update GUI
 
 		}
 		
@@ -314,16 +314,35 @@ public class SortShow extends JPanel {
 		public void BubbleSort(){
 			//getting the date and time when the bubble sort starts
 			Calendar start = Calendar.getInstance();
-			//Using the selection sort to lines_lengths sort the array
+			//Using the bubble sort to lines_lengths sort the array
 
-			//You need to complete this part.
-
+			bubble_Sort(total_number_of_lines);
+			paintComponent(this.getGraphics());
 			//getting the date and time when the bubble sort ends
 			Calendar end = Calendar.getInstance();
 			//getting the time it took for the bubble sort to execute
 			//subtracting the end time with the start time
 			SortGUI.bubbleTime = end.getTime().getTime() - start.getTime().getTime();
 		}
+
+		public void bubble_Sort(int n){ //method to sort using bubble sort, takes an integer of size n which is size of the array
+			for(int lastIndex = n-1; lastIndex > 0; lastIndex--){ //begin at last index of array and move towards the front of the array
+				int lastSwapIndex = 0; //part of betterBubbleSort, we can keep track of most recent swap in inner loop
+				for(int i = 0; i < lastIndex; i++){ //this loop is where we compare and swap elements
+					if(lines_lengths[i] > lines_lengths[i+1]) { //check and see if value at index i is greater than value at index i+1, if true, swap
+						swap(i, i + 1); //simple swap method that swaps elements at i and i+1
+						lastSwapIndex = i; //keeps track of most recent swap to get better performance, doesn't look at already sorted elements
+						paintComponent(this.getGraphics()); //update GUI
+					}
+					}
+				lastIndex = lastSwapIndex + 1; //updates bounds so that we don't make unnecessary comparisons
+				}
+			}
+
+
+
+
+
 
 
 
@@ -332,7 +351,7 @@ public class SortShow extends JPanel {
 		public void InsertionSort(){
 			//getting the date and time when the insertion sort starts
 			Calendar start = Calendar.getInstance();
-			//Using the selection sort to lines_lengths sort the array
+			//Using the insertion sort to lines_lengths sort the array
 
 			//You need to complete this part.
 
@@ -346,7 +365,7 @@ public class SortShow extends JPanel {
 		public void ShellSort(){
 			//getting the date and time when the shell sort starts
 			Calendar start = Calendar.getInstance();
-			//Using the selection sort to lines_lengths sort the array
+			//Using the shell sort to lines_lengths sort the array
 
 			//You need to complete this part.
 
@@ -360,7 +379,7 @@ public class SortShow extends JPanel {
 		public void QuickSort(){
 			//getting the date and time when the quick sort starts
 			Calendar start = Calendar.getInstance();
-			//Using the selection sort to lines_lengths sort the array
+			//Using the quick sort to lines_lengths sort the array
 
 			//You need to complete this part.
 
