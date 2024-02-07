@@ -382,6 +382,10 @@ public class SortShow extends JPanel {
 			//Using the quick sort to lines_lengths sort the array
 
 			//You need to complete this part.
+			//Calls the recursive function for quicksort
+			quicksort(lines_lengths,0,total_number_of_lines -1);
+			//updates gui
+			paintComponent(this.getGraphics());
 
 			//getting the date and time when the quick sort ends
 			Calendar end = Calendar.getInstance();
@@ -390,6 +394,72 @@ public class SortShow extends JPanel {
 			SortGUI.quickTime = end.getTime().getTime() - start.getTime().getTime();
 		}
 
+		private static final int CUTOFF = 3; //cutoff component, once array is sorted in sets of 3 it will call insertion
+												//sort to finish the sorting
+		//returns the median of the left center and right int provided
+		private int median3( int[] a, int left, int right)
+		{
+			int center = (left + right )/2; //sets a center to be the int middle of the left and right
+			if(a[center] < a[left]) //swaps left to the middle if it is greater than the center
+				swap(left, center);
+			if(a[right] < a[left]) // swaps left to the right if left is greater than right
+				swap(left,right);
+			if(a[right] < a[center]) // swaps center to the right if it is greater than the right
+				swap(center,right);
+			swap(center, right-1); //places the pivot at right-1
+			paintComponent(this.getGraphics()); //updates gui
+			return a[right -1]; //returns the median
+		}
+
+		//recursive call for quicksort, uses a median of three and a cutoff of three
+		private void quicksort(int [] a, int left, int right)
+		{
+			if( left + CUTOFF <= right)
+			{
+				int pivot = median3(a, left, right); // sets the pivot value
+
+				//begins the partitioning
+				int i = left, j = right -1;
+				for( ; ; )
+				{
+					while(a[++i] < pivot){} //goes through entire array
+					while(a[--j] > pivot){}
+					if(i<j) {
+						swap(i, j);
+						paintComponent(this.getGraphics()); //updates gui
+					}
+					else
+						break;
+				}
+				swap(i, right-1);
+				paintComponent(this.getGraphics());
+
+				quicksort(a,left, i-1);  //recursive calls
+				quicksort(a, i+1, right);
+
+			}
+			else
+				insertionSort(a,left,right); //once sets are sorted up until the sets of 3 it will call
+												//insertion sort to finish the sorting of the sets of 3
+
+		}
+
+		//basic insertion sort that is called from quicksort
+		public void insertionSort(int [] a, int left, int right)
+		{
+			for(int p = left+1; p<= right; p++)
+			{
+				int tmp = a[p];
+				int j;
+				for(j = p; j> left && tmp < a[j-1]; j--)
+				{
+					a[j] = a[j-1];
+					paintComponent(this.getGraphics());
+				}
+				a[j]=tmp;
+				paintComponent(this.getGraphics());
+			}
+		}
 	//////////////////////////////////////////////////////////////////////	
 		
 		//This method resets the window to the scrambled lines display
