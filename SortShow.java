@@ -87,6 +87,7 @@ public class SortShow extends JPanel {
 				int indexOfNextSmallest = getIndexOfSmallest(index, total_number_of_lines -1);
 				//swaps the next smallest int with the current index
 				swap(index, indexOfNextSmallest);
+
 			}
 
 
@@ -113,6 +114,8 @@ public class SortShow extends JPanel {
 				{
 					min = lines_lengths[index];
 					indexOfMin = index;
+
+
 				}
 				paintComponent(this.getGraphics());
 			}
