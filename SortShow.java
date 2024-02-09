@@ -87,6 +87,8 @@ public class SortShow extends JPanel {
 				int indexOfNextSmallest = getIndexOfSmallest(index, total_number_of_lines -1);
 				//swaps the next smallest int with the current index
 				swap(index, indexOfNextSmallest);
+				delay(15);
+				paintComponent(this.getGraphics());//update GUI
 
 			}
 
@@ -117,7 +119,7 @@ public class SortShow extends JPanel {
 
 
 				}
-				paintComponent(this.getGraphics());
+
 			}
 
 			return indexOfMin; //passes back the index of the min value found inbetween the indices passed in
@@ -348,19 +350,19 @@ public class SortShow extends JPanel {
 			Calendar start = Calendar.getInstance();
 			//Using the insertion sort to lines_lengths sort the array
 			//You need to complete this part.
-			int n = total_number_of_lines - 1;
-			for (int i = 1; i < n; ++i){
-				int key = lines_lengths[i];
-				int j = i - 1;
+			int n = total_number_of_lines;
+			for (int i = 1; i < n; ++i){ //loop through each element in array
+				int key = lines_lengths[i]; //key value is set to element at current index
+				int j = i - 1; // j is index -1, starting at i = 1 so we dont get out of bounds error
 
-				while (j >= 0 && lines_lengths[j] > key){
+				while (j >= 0 && lines_lengths[j] > key){ //moving element to the left, until element to the left is smaller than it, or we hit 0
 					lines_lengths[j + 1] = lines_lengths[j];
 					j = j - 1;
-					paintComponent(this.getGraphics());
+					paintComponent(this.getGraphics()); //update GUI
 
 				}
-				lines_lengths[j + 1] = key;
-				paintComponent(this.getGraphics());
+				lines_lengths[j + 1] = key; //update array
+				paintComponent(this.getGraphics()); //update GUI
 
 			}
 
@@ -377,20 +379,22 @@ public class SortShow extends JPanel {
 			//Using the shell sort to lines_lengths sort the array
 
 			//You need to complete this part.
-			int size = total_number_of_lines - 1;
+			int size = total_number_of_lines;
 
-			for(int gap = size / 2; gap > 0; gap/=2){
-				for(int i = gap; i < size; i++){
+			for(int gap = size / 2; gap > 0; gap/=2){ //for loop, using gaps to sort
+				for(int i = gap; i < size; i++){ //nested for loop
 					int key = lines_lengths[i];
 					int j = i;
-					while(j>=gap && lines_lengths[j - gap] > key){
+					while(j>=gap && lines_lengths[j - gap] > key){ //same idea as insertionSort, moving to left until can't anymore
 						lines_lengths[j] = lines_lengths[j - gap];
 						j -= gap;
-						paintComponent(this.getGraphics());
+						paintComponent(this.getGraphics()); //update GUI
+						delay(2);
 
 					}
-					lines_lengths[j] = key;
-					paintComponent(this.getGraphics());
+					lines_lengths[j] = key; //update array
+					paintComponent(this.getGraphics()); //update GUI
+
 
 				}
 			}
@@ -455,12 +459,17 @@ public class SortShow extends JPanel {
 					if(i<j) {
 						swap(i, j);
 						paintComponent(this.getGraphics()); //updates gui
+						delay(10);
 					}
-					else
+					else {
+						paintComponent(this.getGraphics()); //updates gui
+						delay(10);
 						break;
+					}
 				}
-				swap(i, right-1);
-				paintComponent(this.getGraphics());
+
+				swap(i, right-1); //swap elements at i and right-1
+				paintComponent(this.getGraphics()); //update gui
 
 				quicksort(a,left, i-1);  //recursive calls
 				quicksort(a, i+1, right);
@@ -475,17 +484,17 @@ public class SortShow extends JPanel {
 		//basic insertion sort that is called from quicksort
 		public void insertionSort(int [] a, int left, int right)
 		{
-			for(int p = left+1; p<= right; p++)
+			for(int p = left+1; p<= right; p++) //loop to go through array
 			{
-				int tmp = a[p];
+				int tmp = a[p]; //set inital value
 				int j;
-				for(j = p; j> left && tmp < a[j-1]; j--)
+				for(j = p; j> left && tmp < a[j-1]; j--) //nested loop, moves element to left until it finds element less than it or hits 02
 				{
 					a[j] = a[j-1];
-					paintComponent(this.getGraphics());
+					paintComponent(this.getGraphics()); //update GUI
 				}
-				a[j]=tmp;
-				paintComponent(this.getGraphics());
+				a[j]=tmp; //update array
+				paintComponent(this.getGraphics()); //update GUI
 			}
 		}
 	//////////////////////////////////////////////////////////////////////
