@@ -10,8 +10,14 @@ import java.awt.*;
 import java.util.Calendar;
 import java.util.Random;
 
-//just a new comment to test commit
-// just another comment
+/*
+some functions have a delay, some do not, it is dependent on our laptops, and we were able to get it to run consistently with the
+current delays. buttons were added under the other buttons and the times were added under the other times. buttons work similar to how they did
+before. buttons are deactivated when they aren't meant to be used or if they've already been clicked. iterative merge was not changed. we have
+an insertion sort that is used by quicksort, and an insertion sort that is just used when the button for it is clicked. they are seperate but
+essentially do the same exact thing. we tried to update the GUI after each swap, and so that it runs at a reasonable time
+*/
+
 
 //The class that has all the sorts in it
 public class SortShow extends JPanel {
@@ -87,8 +93,9 @@ public class SortShow extends JPanel {
 				int indexOfNextSmallest = getIndexOfSmallest(index, total_number_of_lines -1);
 				//swaps the next smallest int with the current index
 				swap(index, indexOfNextSmallest);
-				delay(15);
+
 				paintComponent(this.getGraphics());//update GUI
+				delay(15);
 
 			}
 
@@ -116,10 +123,7 @@ public class SortShow extends JPanel {
 				{
 					min = lines_lengths[index];
 					indexOfMin = index;
-
-
 				}
-
 			}
 
 			return indexOfMin; //passes back the index of the min value found inbetween the indices passed in
